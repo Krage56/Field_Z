@@ -1,4 +1,4 @@
-#include "head.h"
+#include "Field_Z.h"
 using namespace std;
 int main() {
     Field_Z l1, l2(4, 3);
