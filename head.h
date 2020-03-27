@@ -9,6 +9,7 @@ class Field_Z{
 public:
     Field_Z();
     Field_Z(const Field_Z&);
+
     Field_Z(const size_t, const long long);
     ~Field_Z();
 
@@ -32,11 +33,23 @@ public:
 
     explicit operator long long() const;
     explicit operator int() const;
+
     friend std::ostream& operator<< (std::ostream& stream, Field_Z& ex) {
         stream << "Number: " << ex._data << ", base: " << ex._base;
         return stream;
     }
-
+    friend const Field_Z operator+(long long a, const Field_Z & obj){
+        return obj + a;
+    }
+    friend const Field_Z operator*(long long a, const Field_Z & obj){
+        return obj * a;
+    }
+    friend const Field_Z operator-(long long a, const Field_Z & obj){
+        return Field_Z(obj._base, obj._data * (-1) + a);
+    }
+    friend const Field_Z operator/(long long a, const Field_Z & obj){
+        return Field_Z(obj._base, a) / obj;
+    }
 
 protected:
     bool equBase(const Field_Z&, const Field_Z&) const;

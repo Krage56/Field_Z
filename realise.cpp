@@ -5,6 +5,7 @@ Field_Z::Field_Z() {
     _data = 0;
 }
 
+
 Field_Z::Field_Z(const size_t newBase, const long long newData) {
     _base = newBase;
     _data = newData % (long long)newBase;
@@ -13,6 +14,7 @@ Field_Z::Field_Z(const Field_Z& newObj) {
     _base = newObj._base;
     _data = newObj._data;
 }
+
 
 Field_Z::~Field_Z() {
     _base = 0;
@@ -60,7 +62,8 @@ Field_Z Field_Z::operator+(const Field_Z& a) const {
 
 
 Field_Z Field_Z::operator+(const long long a) const {
-    Field_Z result(_base, (a % (long long)_base + _data % (long long)_base) % (long long)_base);
+    Field_Z result(_base, (a % (long long)_base +
+        _data % (long long)_base) % (long long)_base);
     return result;
 }
 

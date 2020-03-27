@@ -25,5 +25,11 @@ int main() {
     cout << l5 << endl;
     l5 = l5/4;
     cout << l5 << endl;
+    l5 = 3 + l5;
+//    cout << l5 << endl;
+//    l5 = 6 - l5;
+    cout << l5 << endl;
+    l5 = 8 / l5;
+    cout << l5 << endl;
     return 0;
 }
