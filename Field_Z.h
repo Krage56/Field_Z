@@ -5,6 +5,7 @@
 long long gcd(long long, long long, long long &, long long &);//solution of diophantine equation
 
 
+
 class Field_Z{
 public:
     Field_Z();
@@ -56,6 +57,16 @@ public:
     }
     friend const Field_Z operator/(long long a, const Field_Z & obj){
         return Field_Z(obj._base, a) / obj;
+    }
+    friend const Field_Z binpow(Field_Z & obj, long deg) {
+        if (deg == 0)
+            return Field_Z(obj._base,1);
+        if (deg % 2 == 1)
+            return binpow (obj, deg - 1) * obj;
+        else {
+            Field_Z b = binpow (obj, deg / 2);
+            return b * b;
+        }
     }
 
 protected:
