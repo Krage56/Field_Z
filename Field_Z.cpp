@@ -1,3 +1,7 @@
+//
+// Created by krage56 on 28.03.2020.
+//
+
 #include "Field_Z.h"
 
 Field_Z::Field_Z() {
@@ -63,7 +67,7 @@ Field_Z Field_Z::operator+(const Field_Z& a) const {
 
 Field_Z Field_Z::operator+(const long long a) const {
     Field_Z result(_base, (a % (long long)_base +
-        _data % (long long)_base) % (long long)_base);
+                           _data % (long long)_base) % (long long)_base);
     return result;
 }
 
@@ -115,7 +119,9 @@ Field_Z Field_Z::operator/(const Field_Z & div) const {
     if(*this == div) return Field_Z(_base, 1);
     if(!equBase(*this, div)) return Field_Z(0, 0);
     long long oppose, param;
-    long long gcd_loc = gcd(div._data, _base, oppose, param);
+    Field_Z copy_div(div._base, div._data);
+    if(copy_div < 0)copy_div.normalize();
+    long long gcd_loc = gcd(copy_div._data, _base, oppose, param);
     //gcd_loc != 1 ? std::cout << "Bad" : std::cout << "Good";
     Field_Z op_el(_base, oppose);
     if(op_el < 0) op_el.normalize();
@@ -168,7 +174,7 @@ void Field_Z::normalize(){
 void Field_Z::operator+=(const Field_Z &first) {
     if(equBase(*this, first)) {
         this->_data = (this->_data + first._data) %
-                        (long long)_base;
+                      (long long)_base;
 
     }
 }
@@ -221,7 +227,6 @@ void Field_Z::operator/=(const long long a) {
     tmp_obj = *this / tmp_obj;
     _data = tmp_obj._data;
 }
-
 
 long long gcd(long long a, long long b, long long &x, long long &y){
     if (a == 0) {
