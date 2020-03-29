@@ -16,7 +16,6 @@ public:
     Field_Z& operator[](const size_t);
     Field_Z& operator=(const Field_Z&);
     Field_Z& operator=(const long long);
-    //void operator+=(const long long);
     Field_Z operator+(const Field_Z&)const;
     Field_Z operator+(const long long)const;
     Field_Z operator-(const Field_Z&)const;
@@ -30,6 +29,14 @@ public:
     bool operator>(const long long )const;
     bool operator<(const Field_Z&) const;
     bool operator<(const long long )const;
+    void operator+=(const Field_Z&);
+    void operator-=(const Field_Z&);
+    void operator*=(const Field_Z&);
+    void operator/=(const Field_Z&);
+    void operator+=(const long long);
+    void operator-=(const long long);
+    void operator*=(const long long);
+    void operator/=(const long long);
 
     explicit operator long long() const;
     explicit operator int() const;

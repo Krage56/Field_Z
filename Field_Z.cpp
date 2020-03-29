@@ -165,6 +165,63 @@ void Field_Z::normalize(){
         _data += _base;
 }
 
+void Field_Z::operator+=(const Field_Z &first) {
+    if(equBase(*this, first)) {
+        this->_data = (this->_data + first._data) %
+                        (long long)_base;
+
+    }
+}
+
+void Field_Z::operator-=(const Field_Z &first) {
+    if(equBase(*this, first)) {
+        this->_data = (this->_data - first._data) %
+                      (long long) _base;
+        this->normalize();
+    }
+}
+
+void Field_Z::operator*=(const Field_Z &first) {
+    if(equBase(*this, first)) {
+        Field_Z tmp_obj;
+        tmp_obj = *this * first;
+        _data = tmp_obj._data;
+    }
+}
+
+void Field_Z::operator/=(const Field_Z &first) {
+    if(equBase(*this, first)) {
+        Field_Z tmp_obj;
+        tmp_obj = *this / first;
+        _data = tmp_obj._data;
+    }
+}
+
+void Field_Z::operator+=(const long long a) {
+    Field_Z tmp_obj(_base, a);
+    tmp_obj = *this + tmp_obj;
+    _data = tmp_obj._data;
+}
+
+void Field_Z::operator-=(const long long a) {
+    Field_Z tmp_obj(_base, a);
+    tmp_obj = *this - tmp_obj;
+    _data = tmp_obj._data;
+    this->normalize();
+}
+
+void Field_Z::operator*=(const long long a) {
+    Field_Z tmp_obj(_base, a);
+    tmp_obj = *this * tmp_obj;
+    _data = tmp_obj._data;
+}
+
+void Field_Z::operator/=(const long long a) {
+    Field_Z tmp_obj(_base, a);
+    tmp_obj = *this / tmp_obj;
+    _data = tmp_obj._data;
+}
+
 
 long long gcd(long long a, long long b, long long &x, long long &y){
     if (a == 0) {
