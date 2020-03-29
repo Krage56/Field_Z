@@ -43,7 +43,7 @@ public:
     explicit operator int() const;
 
     friend std::ostream& operator<< (std::ostream& stream, Field_Z& ex) {
-        stream << "Number: " << ex._data << ", base: " << ex._base;
+        stream << ex._data << '\n';
         return stream;
     }
     friend const Field_Z operator+(long long a, const Field_Z & obj){
