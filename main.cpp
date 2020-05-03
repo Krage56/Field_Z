@@ -1,35 +1,36 @@
-#include "Field_Z.h"
+//
+// Created by krage56 on 28.03.2020.
+//
+/*Please write only name of test file without control structures
+If the test located one level lower, please write path like lagrange_tests\test.in 
+*/
 using namespace std;
-int main() {
-    Field_Z l1, l2(4, 3);
-    l1 = 6;
-    l1 = l2;
-    cout << l2 << '\n';
-    l1[8] = 9;
-    cout << l1 << '\n';
-    l2[8] = 7;
-    Field_Z l3(l2 + l1);
-    //l3 = l2 + l1;
-    l3 = 10;
-    cout << l3 << '\n';
-    Field_Z l4;
-    l4 = l2 * 3;
-    //l4 = 3 * l2;
-    cout << l4 << endl;
-    l4 = l4 - 3;
-    cout << l4 << endl;
-    l4[11] = 5;
-    cout << l4 << endl;
-    l3[11] = 2;
-    Field_Z l5 = l4 / l3;
-    cout << l5 << endl;
-    l5 = l5/4;
-    cout << l5 << endl;
-    l5 = 3 + l5;
-//    cout << l5 << endl;
-//    l5 = 6 - l5;
-    cout << l5 << endl;
-    l5 = 8 / l5;
-    cout << l5 << endl;
+#include "Field_Z.h"
+#include "polinominal.h"
+
+int main(int args, char*argv[]){
+    size_t N = 0, p = 0;
+    long a = 0;
+    char file_name[mem_block];
+    cin.getline(file_name, mem_block);
+	string path = file_name;
+	string full_path = argv[0];
+	int index = full_path.find_last_of('\\');
+	std::string pathDir = "";
+	if (index > -1)
+		pathDir = full_path.substr(0, index);
+	full_path = pathDir + '\\' + path;
+    fstream file;
+    file.open(full_path, ios_base::out | ios_base::in);
+	vector<vector<Field_Z>> data;//{x, y}
+    if(!processing(&file, N, p, a, data)){
+        cout << "The program can`t open the file" << endl;
+        return 1;
+    }
+	ofstream answer;
+	answer.open(pathDir + "\\answer.out");
+	answer << calculation(data, p, a) << "\n";
+	answer.close();
+    file.close();
     return 0;
 }
